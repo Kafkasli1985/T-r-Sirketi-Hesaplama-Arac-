@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ITF Statement</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f5c4d">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ITF">
+<style>
+:root{--bg:#f3f2ee;--card:#fff;--ink:#1d2227;--mute:#667078;--line:#d9d7cf;--acc:#0f5c4d;--accfg:#fff;--neg:#a63a2b;--pos:#0f5c4d;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15191c;--card:#1e2327;--ink:#eceae4;--mute:#98a1a8;--line:#333b41;--acc:#4fc3a5;--accfg:#0d1a16;--neg:#ee8c7d;--pos:#4fc3a5;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15191c;--card:#1e2327;--ink:#eceae4;--mute:#98a1a8;--line:#333b41;--acc:#4fc3a5;--accfg:#0d1a16;--neg:#ee8c7d;--pos:#4fc3a5;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px 14px 60px}
+h1{font-size:22px;margin:4px 0 14px}
+h2{font-size:17px;margin:0 0 10px}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin-bottom:14px}
+label{display:block;font-size:13px;color:var(--mute);margin-bottom:3px}
+input{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:9px 10px;min-width:0}
+input:focus,button:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+.g{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.span2{grid-column:span 2}
+button{font:inherit;border:0;border-radius:7px;padding:10px 14px;background:var(--acc);color:var(--accfg);font-weight:600;cursor:pointer}
+button.sec{background:transparent;color:var(--ink);border:1px solid var(--line)}
+button.x{background:none;color:var(--neg);padding:2px 8px;font-size:18px;line-height:1}
+.row{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line);font-size:15px}
+.row small{color:var(--mute);display:block}
+.row .amt{white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
+.empty{color:var(--mute);font-size:14px;margin:6px 0 0}
+.bar{display:flex;gap:10px;flex-wrap:wrap}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 6px;text-align:right;border-top:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--mute);font-weight:600;font-size:13px}
+.sum td{font-weight:600}
+.big{font-size:28px;font-weight:700;margin:6px 0}
+.neg{color:var(--neg)}.pos{color:var(--pos)}
+.sub{font-size:15px;font-weight:700;margin:16px 0 4px}
+@media print{body{background:#fff;color:#000}.noprint{display:none!important}section{border:0;padding:0}}
+</style>
+</head>
+<body>
+<main>
+<h1>ITF Statement</h1>
+
+<section class="noprint">
+  <h2>Hafta ve ayarlar</h2>
+  <div class="g g3">
+    <div class="span2"><label for="wk">Hafta başlangıcı</label><input type="date" id="wk"></div>
+    <div><label for="rent">Haftalık tır kirası ($)</label><input type="number" id="rent" step="any" inputmode="decimal"></div>
+    <div><label for="rate">Mil başı gider ($)</label><input type="number" id="rate" step="any" inputmode="decimal"></div>
+    <div><label for="pct">Gross’tan kesinti (%)</label><input type="number" id="pct" step="any" inputmode="decimal"></div>
+  </div>
+</section>
+
+<section class="noprint">
+  <h2>Yükler</h2>
+  <div class="g">
+    <div><label for="ld">Tarih</label><input type="date" id="ld"></div>
+    <div><label for="lm">Mil</label><input type="number" id="lm" step="any" inputmode="decimal" placeholder="325.5"></div>
+    <div><label for="lr">Güzergâh</label><input id="lr" placeholder="Georgia – South Carolina"></div>
+    <div><label for="lg">Gross ($)</label><input type="number" id="lg" step="any" inputmode="decimal" placeholder="1155"></div>
+    <div class="span2"><button id="addL">Yük ekle</button></div>
+  </div>
+  <div id="loads"></div>
+</section>
+
+<section class="noprint">
+  <h2>Yakıt</h2>
+  <div class="g">
+    <div><label for="fd">Tarih</label><input type="date" id="fd"></div>
+    <div><label for="fa">Tutar ($)</label><input type="number" id="fa" step="any" inputmode="decimal"></div>
+    <div><label for="fp">Yer / not</label><input id="fp" placeholder="Pilot, Macon GA"></div>
+    <div><label for="fl">Galon (isteğe bağlı)</label><input type="number" id="fl" step="any" inputmode="decimal"></div>
+    <div class="span2"><button id="addF">Yakıt ekle</button></div>
+  </div>
+  <div id="fuel"></div>
+</section>
+
+<section class="noprint">
+  <h2>Ekstra gelir / gider</h2>
+  <div class="g">
+    <div class="span2"><label for="ed">Açıklama</label><input id="ed" placeholder="Toll, lumper, bonus, tamir…"></div>
+    <div><label for="ea">Tutar ($)</label><input type="number" id="ea" step="any" inputmode="decimal"></div>
+    <div><label for="et">Tür</label><input list="tl" id="et" value="Gider"><datalist id="tl"><option value="Gider"><option value="Gelir"></datalist></div>
+    <div class="span2"><button id="addE">Kalem ekle</button></div>
+  </div>
+  <div id="extras"></div>
+</section>
+
+<section class="noprint">
+  <h2>Kişisel harcamalar</h2>
+  <p class="empty" style="margin:0 0 10px">Net hesaba karışmaz. Statement’ta ayrı görünür.</p>
+  <div class="g">
+    <div><label for="pc">Kategori</label><input list="pl" id="pc" placeholder="Scale, Yemek, Sigara…"><datalist id="pl"><option value="Scale"><option value="Yemek"><option value="Sigara"><option value="Duş"><option value="Çamaşır"><option value="Diğer"></datalist></div>
+    <div><label for="pa">Tutar ($)</label><input type="number" id="pa" step="any" inputmode="decimal"></div>
+    <div class="span2"><label for="pn">Not (isteğe bağlı)</label><input id="pn" placeholder="Waffle House, CAT Scale…"></div>
+    <div class="span2"><button id="addP">Harcama ekle</button></div>
+  </div>
+  <div id="personal"></div>
+</section>
+
+<div class="bar noprint" style="margin-bottom:14px">
+  <button id="calc">Haftayı hesapla</button>
+  <button class="sec" id="prn">Yazdır / PDF</button>
+</div>
+
+<section class="noprint"><h2>Yedek</h2><p class="empty" id="bkinfo" style="margin:0 0 10px"></p><div class="bar"><button id="bk">Yedeği indir</button><button class="sec" id="rsb">Yedeği yükle</button><input type="file" id="rs" accept=".json,application/json" hidden></div></section>
+
+<section id="stmt" hidden></section>
+</main>
+
+<script>
+var S={settings:{rate:0.14,pct:17,rent:1250},weeks:{}};
+var KEY="tir-hesap-v1";
+try{var raw=localStorage.getItem(KEY);if(raw){var p=JSON.parse(raw);if(p&&p.settings&&p.weeks)S=p;}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+var $=function(i){return document.getElementById(i)};
+var f=function(n){return n.toLocaleString("en-US",{style:"currency",currency:"USD"})};
+var m1=function(n){return n.toLocaleString("en-US",{maximumFractionDigits:1})};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+var num=function(id){var v=parseFloat($(id).value);return isNaN(v)?0:v};
+var iso=function(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+function monday(){var d=new Date();var k=(d.getDay()+6)%7;d.setDate(d.getDate()-k);return iso(d)}
+var week=monday();
+function W(){if(!S.weeks[week])S.weeks[week]={loads:[],fuel:[],extras:[],personal:[]};if(!S.weeks[week].personal)S.weeks[week].personal=[];return S.weeks[week]}
+function dfmt(s){if(!s)return"";var a=s.split("-");return a[2]+"."+a[1]+"."+a[0]}
+
+function setBox(){$("wk").value=week;$("rent").value=S.settings.rent;$("rate").value=S.settings.rate;$("pct").value=S.settings.pct}
+function row(main,sub,amt,kind,i){return '<div class="row"><div>'+main+(sub?'<small>'+sub+'</small>':'')+'</div><div class="amt">'+amt+'<button class="x" data-k="'+kind+'" data-i="'+i+'" aria-label="Sil">×</button></div></div>'}
+function lists(){
+  var w=W(),h="";
+  w.loads.forEach(function(l,i){h+=row(esc(dfmt(l.d))+" · "+esc(l.r||"Yük "+(i+1)),m1(l.m)+" mil",f(l.g),"loads",i)});
+  $("loads").innerHTML=h||'<p class="empty">Bu hafta henüz yük yok.</p>';
+  h="";w.fuel.forEach(function(x,i){h+=row(esc(dfmt(x.d))+" · "+esc(x.p||"Yakıt"),x.l?m1(x.l)+" galon":"",f(x.a),"fuel",i)});
+  $("fuel").innerHTML=h||'<p class="empty">Yakıt kalemi yok.</p>';
+  h="";w.extras.forEach(function(x,i){h+=row(esc(x.n),x.t==="Gelir"?"Gelir":"Gider",(x.t==="Gelir"?"+":"−")+f(x.a),"extras",i)});
+  $("extras").innerHTML=h||'<p class="empty">Ekstra kalem yok.</p>';
+  h="";w.personal.forEach(function(x,i){h+=row(esc(x.c),esc(x.n||""),f(x.a),"personal",i)});
+  $("personal").innerHTML=h||'<p class="empty">Kişisel harcama yok.</p>';
+}
+function calc(){
+  var w=W(),s=S.settings,r={};
+  r.gross=0;r.miles=0;r.mileCost=0;r.fee=0;
+  r.rows=w.loads.map(function(l){var mc=l.m*s.rate,fe=l.g*s.pct/100;r.gross+=l.g;r.miles+=l.m;r.mileCost+=mc;r.fee+=fe;return{l:l,mc:mc,fe:fe,net:l.g-mc-fe}});
+  r.fuel=w.fuel.reduce(function(a,x){return a+x.a},0);
+  r.xin=w.extras.filter(function(x){return x.t==="Gelir"}).reduce(function(a,x){return a+x.a},0);
+  r.xout=w.extras.filter(function(x){return x.t!=="Gelir"}).reduce(function(a,x){return a+x.a},0);
+  r.rent=w.loads.length||w.fuel.length||w.extras.length?s.rent:0;
+  r.income=r.gross+r.xin;
+  r.exp=r.mileCost+r.fee+r.rent+r.fuel+r.xout;
+  r.net=r.income-r.exp;
+  return r;
+}
+function stmt(){
+  var w=W(),s=S.settings,r=calc(),h="";
+  var wend=new Date(week+"T00:00:00");wend.setDate(wend.getDate()+6);
+  h+='<h2>Haftalık statement</h2><p style="color:var(--mute);margin:0">'+dfmt(week)+' – '+dfmt(iso(wend))+'</p>';
+  var mg=r.gross>0?(r.net/r.gross*100).toFixed(1)+"%":"–";
+  h+='<div class="big '+(r.net>=0?"pos":"neg")+'">Net: '+f(r.net)+'</div><p style="margin:0">Gross’un <b>'+mg+'</b>’i net kaldı ('+f(r.net)+' / '+f(r.gross)+')</p>';
+  h+='<div class="sub">Yükler</div><div class="scroll"><table><tr><th>Yük</th><th>Mil</th><th>Gross</th><th>Mil gideri</th><th>%'+s.pct+'</th><th>Yük neti</th></tr>';
+  r.rows.forEach(function(x,i){h+='<tr><td>'+(i+1)+'. '+esc(dfmt(x.l.d))+' '+esc(x.l.r||"")+'</td><td>'+m1(x.l.m)+'</td><td>'+f(x.l.g)+'</td><td>'+f(x.mc)+'</td><td>'+f(x.fe)+'</td><td>'+f(x.net)+'</td></tr>'});
+  if(!r.rows.length)h+='<tr><td colspan="6">Yük yok</td></tr>';
+  h+='<tr class="sum"><td>Toplam</td><td>'+m1(r.miles)+'</td><td>'+f(r.gross)+'</td><td>'+f(r.mileCost)+'</td><td>'+f(r.fee)+'</td><td>'+f(r.gross-r.mileCost-r.fee)+'</td></tr></table></div>';
+  h+='<div class="sub">Yakıt</div><div class="scroll"><table>';
+  w.fuel.forEach(function(x){h+='<tr><td>'+esc(dfmt(x.d))+' '+esc(x.p||"")+'</td><td>'+(x.l?m1(x.l)+" gal":"")+'</td><td>'+f(x.a)+'</td></tr>'});
+  if(!w.fuel.length)h+='<tr><td colspan="3">Yakıt yok</td></tr>';
+  h+='<tr class="sum"><td>Toplam yakıt</td><td></td><td>'+f(r.fuel)+'</td></tr></table></div>';
+  if(w.extras.length){h+='<div class="sub">Ekstra kalemler</div><div class="scroll"><table>';
+    w.extras.forEach(function(x){h+='<tr><td>'+esc(x.n)+'</td><td>'+x.t+'</td><td>'+(x.t==="Gelir"?"+":"−")+f(x.a)+'</td></tr>'});
+    h+='</table></div>'}
+  h+='<div class="sub">Özet</div><div class="scroll"><table>';
+  h+='<tr><td>Yük gross toplamı</td><td>'+f(r.gross)+'</td></tr>';
+  h+='<tr><td>Ekstra gelir</td><td>'+f(r.xin)+'</td></tr>';
+  h+='<tr class="sum"><td>Toplam gelir</td><td>'+f(r.income)+'</td></tr>';
+  h+='<tr><td>Mil gideri ('+m1(r.miles)+' mil × $'+s.rate+')</td><td>−'+f(r.mileCost)+'</td></tr>';
+  h+='<tr><td>Kesinti (%'+s.pct+')</td><td>−'+f(r.fee)+'</td></tr>';
+  h+='<tr><td>Tır kirası</td><td>−'+f(r.rent)+'</td></tr>';
+  h+='<tr><td>Yakıt</td><td>−'+f(r.fuel)+'</td></tr>';
+  h+='<tr><td>Ekstra gider</td><td>−'+f(r.xout)+'</td></tr>';
+  h+='<tr class="sum"><td>Toplam gider</td><td>−'+f(r.exp)+'</td></tr>';
+  h+='<tr class="sum"><td>NET</td><td class="'+(r.net>=0?"pos":"neg")+'">'+f(r.net)+'</td></tr>';
+  h+='<tr class="sum"><td>Net / gross (kazanç oranı)</td><td class="'+(r.net>=0?"pos":"neg")+'">'+mg+'</td></tr></table></div>';
+  if(r.miles>0){h+='<div class="sub">Mil başına</div><div class="scroll"><table>';
+    h+='<tr><td>Gross / mil</td><td>'+f(r.gross/r.miles)+'</td></tr>';
+    h+='<tr><td>Gider / mil</td><td>'+f(r.exp/r.miles)+'</td></tr>';
+    h+='<tr><td>Yakıt / mil</td><td>'+f(r.fuel/r.miles)+'</td></tr>';
+    h+='<tr class="sum"><td>Net / mil</td><td>'+f(r.net/r.miles)+'</td></tr></table></div>'}
+  var P=w.personal||[];
+  if(P.length){var tot={},pt=0,keys=[];
+    h+='<div class="sub">Kişisel harcamalar (net hesaba dahil değil)</div><div class="scroll"><table>';
+    P.forEach(function(x){if(!(x.c in tot)){tot[x.c]=0;keys.push(x.c)}tot[x.c]+=x.a;pt+=x.a;h+='<tr><td>'+esc(x.c)+(x.n?' · '+esc(x.n):'')+'</td><td>'+f(x.a)+'</td></tr>'});
+    h+='</table></div><div class="sub">Kategori toplamları</div><div class="scroll"><table>';
+    keys.forEach(function(k){h+='<tr><td>'+esc(k)+'</td><td>'+f(tot[k])+'</td></tr>'});
+    h+='<tr class="sum"><td>Toplam kişisel harcama</td><td>'+f(pt)+'</td></tr>';
+    h+='<tr class="sum"><td>Net − kişisel harcama</td><td class="'+(r.net-pt>=0?"pos":"neg")+'">'+f(r.net-pt)+'</td></tr></table></div>';}
+  var el=$("stmt");el.innerHTML=h;el.hidden=false;
+}
+var shown=false;
+function refresh(){lists();if(shown)stmt()}
+$("wk").onchange=function(){if($("wk").value){week=$("wk").value;shown=false;$("stmt").hidden=true;refresh()}};
+["rent","rate","pct"].forEach(function(k){$(k).oninput=function(){S.settings[k]=num(k);save();if(shown)stmt()}});
+$("addL").onclick=function(){var m=num("lm"),g=num("lg");if(!(m>0)||!(g>0)){alert("Mil ve gross sıfırdan büyük olmalı.");return}
+  W().loads.push({d:$("ld").value||week,r:$("lr").value.trim(),m:m,g:g});["lm","lg","lr"].forEach(function(i){$(i).value=""});save();refresh()};
+$("addF").onclick=function(){var a=num("fa");if(!(a>0)){alert("Yakıt tutarını gir.");return}
+  W().fuel.push({d:$("fd").value||week,p:$("fp").value.trim(),a:a,l:num("fl")});["fa","fp","fl"].forEach(function(i){$(i).value=""});save();refresh()};
+$("addE").onclick=function(){var a=num("ea"),n=$("ed").value.trim();if(!(a>0)||!n){alert("Açıklama ve tutar gir.");return}
+  W().extras.push({n:n,a:a,t:$("et").value==="Gelir"?"Gelir":"Gider"});["ea","ed"].forEach(function(i){$(i).value=""});save();refresh()};
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("button.x");if(!b)return;
+  W()[b.dataset.k].splice(+b.dataset.i,1);save();refresh()});
+$("addP").onclick=function(){var a=num("pa"),c=$("pc").value.trim();if(!(a>0)||!c){alert("Kategori ve tutar gir.");return}
+  W().personal.push({c:c,a:a,n:$("pn").value.trim()});["pa","pn","pc"].forEach(function(i){$(i).value=""});save();refresh()};
+$("calc").onclick=function(){shown=true;stmt();$("stmt").scrollIntoView({behavior:"smooth"})};
+$("prn").onclick=function(){shown=true;stmt();window.print()};
+setBox();$("ld").value=week;$("fd").value=week;refresh();
+
+function stamp(){return iso(new Date())}
+function bkInfo(){$("bkinfo").textContent=S.lastBackup?"Son yedek: "+dfmt(S.lastBackup):"Henüz yedek alınmadı. Her hafta sonu yedek al."}
+$("bk").onclick=function(){S.lastBackup=stamp();save();var data=JSON.stringify(S,null,1),name="itf-yedek-"+stamp()+".json",file=null;
+  try{file=new File([data],name,{type:"application/json"})}catch(e){}
+  if(file&&navigator.canShare&&navigator.canShare({files:[file]})){navigator.share({files:[file],title:name}).catch(function(){})}
+  else{var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([data],{type:"application/json"}));a.download=name;document.body.appendChild(a);a.click();a.remove()}
+  bkInfo()};
+$("rsb").onclick=function(){$("rs").click()};
+$("rs").onchange=function(){var fl=$("rs").files[0];if(!fl)return;var rd=new FileReader();
+  rd.onload=function(){try{var p=JSON.parse(rd.result);if(!p||!p.settings||!p.weeks)throw 0;
+    if(!confirm("Mevcut veriler silinip yedekteki veriler yüklenecek. Devam?"))return;
+    S=p;save();week=monday();shown=false;$("stmt").hidden=true;setBox();$("ld").value=week;$("fd").value=week;refresh();bkInfo();alert("Yedek yüklendi.")}
+    catch(e){alert("Bu dosya geçerli bir yedek değil.")}};
+  rd.readAsText(fl);$("rs").value=""};
+bkInfo();
+try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}
+if("serviceWorker" in navigator&&location.protocol.indexOf("http")===0){navigator.serviceWorker.register("sw.js").catch(function(){})}
+</script>
+</body>
+</html>
